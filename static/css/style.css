@@ -1,0 +1,375 @@
+:root {
+    --dark-grey: #2c3e50;
+    --steel-blue: #4682b4;
+    --light-grey: #ecf0f1;
+    --white: #ffffff;
+    --accent: #3498db;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Login Page Styling */
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--steel-blue) 100%);
+}
+
+.login-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-card h1 {
+    text-align: center;
+    color: var(--dark-grey);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--steel-blue);
+}
+
+.btn-signin {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--steel-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 1rem;
+}
+
+.btn-signin:hover {
+    background-color: #356a94;
+    transform: translateY(-2px);
+}
+
+/* Chatbot UI */
+.chat-wrapper {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: white;
+    height: 80vh;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: var(--dark-grey);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-footer {
+    padding: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.message {
+    max-width: 75%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 15px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.bot-msg {
+    align-self: flex-start;
+    background: #e9ecef;
+    color: var(--dark-grey);
+    border-bottom-left-radius: 2px;
+}
+
+.user-msg {
+    align-self: flex-end;
+    background: var(--steel-blue);
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.option-btn {
+    background: white;
+    border: 1px solid var(--steel-blue);
+    color: var(--steel-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.option-btn:hover {
+    background: var(--steel-blue);
+    color: white;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Reports List */
+.reports-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.report-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+}
+
+.report-card:hover {
+    transform: scale(1.01);
+}
+
+.report-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.report-info {
+    flex: 1;
+}
+
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-pending {
+    background: #ffeaa7;
+    color: #d35400;
+}
+
+.status-match {
+    background: #55efc4;
+    color: #00b894;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+nav {
+    background: var(--dark-grey);
+    padding: 1rem;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Sketch-Style Upload Component */
+.sketch-upload-container {
+    border: 2px dashed var(--dark-grey);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 15px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.sketch-upload-container:hover {
+    background: #f0f4f8;
+    transform: scale(1.02);
+}
+
+.sketch-icon-circle {
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--dark-grey);
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.sketch-arrow {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid var(--dark-grey);
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.sketch-arrow::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 15px;
+    background: var(--dark-grey);
+    top: 20px;
+    left: -4px;
+}
+
+.sketch-text {
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--dark-grey);
+    text-transform: uppercase;
+}
+
+.uploading-animation .sketch-icon-circle {
+    animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+.upload-success-tick {
+    color: #27ae60;
+    font-size: 3rem;
+    font-weight: bold;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - Campus AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <span>Campus AI Lost & Found</span>
+        <a href="{{ url_for('chatbot') }}">Chatbot</a>
+        <a href="{{ url_for('my_reports') }}">My Reports</a>
+        <a href="{{ url_for('logout') }}">Logout ({{ session['username'] }})</a>
+    </nav>
+
+    <div class="chat-wrapper">
+        <div class="chat-header">
+            <strong>Assistant</strong>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-footer" id="chat-footer">
+            <!-- Input or Options -->
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

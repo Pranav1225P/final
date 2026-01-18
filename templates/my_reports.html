@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reports - Campus AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <span>Campus AI Lost & Found</span>
+        <a href="{{ url_for('chatbot') }}">Chatbot</a>
+        <a href="{{ url_for('my_reports') }}">My Reports</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    <div class="reports-container">
+        <h2>My Submitted Reports</h2>
+        {% if reports %}
+        {% for report in reports %}
+        <div class="report-card">
+            <img src="{{ url_for('static', filename='uploads/' + report['image_path']) }}" class="report-img"
+                alt="Item">
+            <div class="report-info">
+                <h3>{{ report['item_name'] }} <span style="font-size: 0.8rem; color: #777;">({{ report['type']
+                        }})</span></h3>
+                <p><strong>Category:</strong> {{ report['category'] }}</p>
+                <p><strong>Location:</strong> {{ report['location'] }}</p>
+                <p>{{ report['description'][:100] }}...</p>
+            </div>
+            <div class="status-box">
+                <span class="status-badge {{ 'status-pending' if report['status'] == 'PENDING' else 'status-match' }}">
+                    {{ report['status'] }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No reports found. Go to Chatbot to report an item.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
