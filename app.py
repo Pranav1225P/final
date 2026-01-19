@@ -4,8 +4,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from werkzeug.utils import secure_filename
 import cv2
 import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+import math
+from collections import Counter
 
 app = Flask(__name__)
 app.secret_key = 'campus_ai_secret_key'
@@ -50,12 +50,28 @@ def allowed_file(filename):
 def calculate_text_similarity(text1, text2):
     if not text1 or not text2:
         return 0.0
-    try:
-        vectorizer = TfidfVectorizer().fit_transform([text1, text2])
-        vectors = vectorizer.toarray()
-        return cosine_similarity(vectors)[0][1]
-    except:
+    
+    # Simple manual TF-IDF / Cosine Similarity
+    def get_tokens(text):
+        return text.lower().split()
+
+    t1 = get_tokens(text1)
+    t2 = get_tokens(text2)
+    
+    vocab = set(t1 + t2)
+    if not vocab: return 0.0
+    
+    v1 = Counter(t1)
+    v2 = Counter(t2)
+    
+    dot = sum(v1[w] * v2[w] for w in vocab)
+    norm1 = math.sqrt(sum(v1[w]**2 for w in v1))
+    norm2 = math.sqrt(sum(v2[w]**2 for w in v2))
+    
+    if norm1 == 0 or norm2 == 0:
         return 0.0
+        
+    return dot / (norm1 * norm2)
 
 def calculate_image_similarity(img_path1, img_path2):
     try:
