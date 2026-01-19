@@ -16,6 +16,27 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+def init_db():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE NOT NULL, password TEXT NOT NULL)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Reports (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, type TEXT NOT NULL, item_name TEXT NOT NULL, category TEXT NOT NULL, description TEXT NOT NULL, location TEXT NOT NULL, date_item TEXT NOT NULL, image_path TEXT NOT NULL, status TEXT DEFAULT 'PENDING', created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (user_id) REFERENCES Users(id))''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS MatchResults (id INTEGER PRIMARY KEY AUTOINCREMENT, lost_report_id INTEGER NOT NULL, found_report_id INTEGER NOT NULL, score REAL NOT NULL, FOREIGN KEY (lost_report_id) REFERENCES Reports(id), FOREIGN KEY (found_report_id) REFERENCES Reports(id))''')
+    
+    # Insert initial hardcoded users
+    users = [('BIT2025077', '12122007'), ('BIT2025075', '25042008')]
+    for username, password in users:
+        try:
+            cursor.execute('INSERT INTO Users (username, password) VALUES (?, ?)', (username, password))
+        except sqlite3.IntegrityError:
+            pass 
+    conn.commit()
+    conn.close()
+
+# Run initialization
+if not os.path.exists('database.db'):
+    init_db()
+
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
