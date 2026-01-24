@@ -165,7 +165,14 @@ def run_ai_matching(found_report_id):
 @app.route('/')
 def index():
     if 'user_id' in session:
+        if session.get('role') == 'ADMIN':
+            return redirect(url_for('admin_dashboard'))
         return redirect(url_for('chatbot'))
+    return render_template('portal_selection.html')
+
+@app.route('/select_role/<role>')
+def select_role(role):
+    session['target_role'] = role.upper()
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])

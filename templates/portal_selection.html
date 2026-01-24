@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Portal | Campus AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .portal-selection-body {
+            background-color: var(--light-grey);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .portal-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .portal-card h1 {
+            color: var(--dark-grey);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .portal-card p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .portal-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .portal-option {
+            text-decoration: none;
+            padding: 30px 20px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .portal-option:hover {
+            border-color: var(--steel-blue);
+            background-color: rgba(118, 134, 146, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .portal-option .icon {
+            font-size: 3rem;
+        }
+
+        .portal-option span {
+            font-weight: 700;
+            color: var(--dark-grey);
+            font-size: 1.1rem;
+        }
+
+        .portal-option.student i {
+            color: var(--steel-blue);
+        }
+
+        .portal-option.admin i {
+            color: #444d56;
+        }
+    </style>
+</head>
+
+<body class="portal-selection-body">
+    <div class="portal-card">
+        <h1>Campus AI</h1>
+        <p>Choose your portal to proceed</p>
+        <div class="portal-options">
+            <a href="{{ url_for('select_role', role='student') }}" class="portal-option student">
+                <div class="icon">🎓</div>
+                <span>Student Portal</span>
+            </a>
+            <a href="{{ url_for('select_role', role='admin') }}" class="portal-option admin">
+                <div class="icon">🛡️</div>
+                <span>Admin Portal</span>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
