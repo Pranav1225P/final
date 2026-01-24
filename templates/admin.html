@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Campus AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+    <header>
+        <div class="header-content">
+            <div class="logo">Campus AI <span>Admin</span></div>
+            <div class="user-info">
+                <span>Welcome, {{ session['username'] }}</span>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="reports-container">
+        <h1>System-Wide Reports</h1>
+        <div class="reports-filter">
+            <p>Managing all items reported by students.</p>
+        </div>
+
+        <div class="reports-grid">
+            {% if reports %}
+            {% for report in reports %}
+            <div class="report-card" data-status="{{ report.status }}">
+                <div class="report-header">
+                    <span class="type-badge {{ report.type.lower() }}">{{ report.type }}</span>
+                    <span class="status-badge">{{ report.status }}</span>
+                </div>
+                <div class="report-image">
+                    <img src="{{ url_for('static', filename='uploads/' + report.image_path) }}"
+                        alt="{{ report.item_name }}">
+                </div>
+                <div class="report-details">
+                    <h3>{{ report.item_name }}</h3>
+                    <p class="category">{{ report.category }}</p>
+                    <p class="description">{{ report.description }}</p>
+                    <div class="meta-info">
+                        <span>📍 {{ report.location }}</span>
+                        <span>📅 {{ report.date_item }}</span>
+                    </div>
+                    <div class="reporter-info">
+                        <span>👤 Reported by: <strong>{{ report.reporter }}</strong></span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="no-reports">
+                <p>No reports found in the system.</p>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <style>
+        .admin-body {
+            background-color: var(--light-grey);
+        }
+
+        .reporter-info {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            font-size: 0.85rem;
+            color: var(--dark-grey);
+        }
+
+        .header-content span {
+            color: var(--steel-blue);
+            font-weight: bold;
+            margin-left: 5px;
+        }
+    </style>
+</body>
+
+</html>

@@ -9,7 +9,8 @@ def init_db():
     CREATE TABLE IF NOT EXISTS Users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        role TEXT DEFAULT 'STUDENT'
     )
     ''')
 
@@ -45,13 +46,14 @@ def init_db():
 
     # Insert initial hardcoded users
     users = [
-        ('BIT2025077', '12122007'),
-        ('BIT2025075', '25042008')
+        ('BIT2025077', '12122007', 'STUDENT'),
+        ('BIT2025075', '25042008', 'STUDENT'),
+        ('MCET', 'MCET12345', 'ADMIN')
     ]
     
-    for username, password in users:
+    for username, password, role in users:
         try:
-            cursor.execute('INSERT INTO Users (username, password) VALUES (?, ?)', (username, password))
+            cursor.execute('INSERT INTO Users (username, password, role) VALUES (?, ?, ?)', (username, password, role))
         except sqlite3.IntegrityError:
             pass # User already exists
 
